@@ -8,11 +8,11 @@ final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
   initialLocation: RouterPath.loginScreen,
   routes: [
-    // GoRoute(
+  //  GoRoute(
     //   path: RouterPath.loginScreen,
-    //   name: 'loginScreen',
-    //   builder: (context, state) => const LoginScreen(),
-    // ),
+     //name: 'loginScreen',
+      // builder: (context, state) => const LoginScreen(),
+     //),
     // TODO: Add more routes as needed
   ],
 );
