@@ -1,8 +1,10 @@
 class Urls {
   // TODO: Change this to your actual base URL
-  static String baseUrl = 'https://your-api.com/api';
+  static String baseUrl = 'https://widespheres.com/api';
 
   /// Auth
+  static String test_auth = '/test-auth-key';
+  
   static String loginUrl = '/auth/login';
   static String registerUrl = '/auth/register';
   static String logoutUrl = '/auth/logout';
@@ -11,4 +13,6 @@ class Urls {
 
   /// Home
   static String homeUrl = '/home';
+
+  //static String get  => null;
 }

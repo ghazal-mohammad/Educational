@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class ColorManager {
   // Base Colors
-  static const Color scaffoldLight = Color(0xfff9fafb);
-  static const Color scaffoldDark = Color(0xFF1F2937);
+  static const Color scaffoldLight = Color(0xffFCF8FF);
+  static const Color scaffoldDark = Color(0xFF201630);
 
-  static const Color primaryColor = Color(0xFF083B6D);
-  static const Color secondaryColor = Color(0xFF135B8C);
-  static const Color thirdBlueColor = Color(0xFF00B5E5);
+  static const Color primaryColor = Color(0xFF331E35);
+  static const Color secondaryColor = Color(0xFFB7A4C6);
+  static const Color thirdBlueColor = Color(0xFF806D95);
 
   static const Color buttonColor = Color(0xFF2563EB);
-  static const Color textLight = Color(0xFF145B8F);
-  static const Color textDark = Color(0xFFE5E7EB);
+  static const Color textLight = Color(0xFF331E53);
+  static const Color textDark = Color(0xFFFCF8FF);
   static const Color normalTextLight = Color(0xFF6B7280);
   static const Color normalText = Color(0xFF374151);
 
