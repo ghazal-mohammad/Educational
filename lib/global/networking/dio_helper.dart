@@ -1,5 +1,5 @@
-import 'dart:io';
-
+import 'dart:io' as io;
+import 'package:lms/global/networking/retry_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,7 +9,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../utils/consts/urls.dart';
 import '../utils/helper/console_logger.dart';
 import 'failure.dart';
-import 'dart:io' as io;
 import 'package:flutter/foundation.dart';
 
 typedef JsonDecoder<T> = T Function(Map<String, dynamic> json);
@@ -315,7 +314,7 @@ class DioHelper {
         return NetworkFailure();
 
       case DioExceptionType.unknown:
-        if (e.error is SocketException) {
+        if (e.error is io.SocketException) {
           return NetworkFailure();
         }
         return ServerError(e.message ?? "unexpected_network_error".tr());

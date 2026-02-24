@@ -6,30 +6,30 @@ import 'app_color_scheme.dart';
 
 abstract class AppThemes {
   static ThemeData get light => _theme(
-        brightness: Brightness.light,
-        primaryColor: ColorManager.textLight,
-        appBarShadowColor: ColorManager.white.withValues(alpha: 0.8),
-        primaryIconColor: ColorManager.primaryIconColor,
-        colorScheme: AppColorScheme.light,
-        appBarColor: ColorManager.scaffoldLight,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: ColorManager.white,
-        ),
-        scaffoldBackgroundColor: ColorManager.scaffoldLight,
-      );
+    brightness: Brightness.light,
+    primaryColor: ColorManager.textLight,
+    appBarShadowColor: ColorManager.white.withValues(alpha: 0.8),
+    primaryIconColor: ColorManager.primaryIconColor,
+    colorScheme: AppColorScheme.light,
+    appBarColor: ColorManager.scaffoldLight,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: ColorManager.white,
+    ),
+    scaffoldBackgroundColor: ColorManager.scaffoldLight,
+  );
 
   static ThemeData get dark => _theme(
-        brightness: Brightness.dark,
-        primaryColor: ColorManager.white,
-        primaryIconColor: ColorManager.white,
-        appBarShadowColor: ColorManager.softBlack.withValues(alpha: 0.3),
-        colorScheme: AppColorScheme.dark,
-        appBarColor: ColorManager.softBlack,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: ColorManager.softBlack,
-        ),
-        scaffoldBackgroundColor: ColorManager.scaffoldDark,
-      );
+    brightness: Brightness.dark,
+    primaryColor: ColorManager.white,
+    primaryIconColor: ColorManager.white,
+    appBarShadowColor: ColorManager.softBlack.withValues(alpha: 0.3),
+    colorScheme: AppColorScheme.dark,
+    appBarColor: ColorManager.softBlack,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: ColorManager.softBlack,
+    ),
+    scaffoldBackgroundColor: ColorManager.scaffoldDark,
+  );
 
   static ThemeData _theme({
     required Brightness brightness,
@@ -164,10 +164,10 @@ extension Utils on BuildContext {
   TextStyle get captionBold => Theme.of(this).textTheme.displayLarge!;
 
   TextStyle get blueLabelText => TextStyle(
-        color: const Color(0xff0066B3),
-        fontWeight: FontWeight.w600,
-        fontSize: 15.sp,
-      );
+    color: const Color(0xff0066B3),
+    fontWeight: FontWeight.w600,
+    fontSize: 15.sp,
+  );
 
   // ====== Theme Check ======
   bool get isLightTheme => Theme.of(this).brightness == Brightness.light;
@@ -209,4 +209,3 @@ extension Utils on BuildContext {
   Color get fontGray => Theme.of(this).colorScheme.outline;
   Color get blackBlue => ColorManager.blackBlue;
 }
-

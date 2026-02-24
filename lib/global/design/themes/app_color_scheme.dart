@@ -55,4 +55,3 @@ class AppColorScheme {
     secondaryContainer: ColorManager.primaryGreyText,
   );
 }
-

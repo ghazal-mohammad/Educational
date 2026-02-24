@@ -46,9 +46,9 @@ abstract class CommonSizes {
   static final hHugeSpace = SizedBox(width: 100.w);
 
   static divider(BuildContext context) => Divider(
-        height: 1.5.h,
-        color: ColorManager.grey.withValues(alpha: 0.2),
-        thickness: 1.5.h,
-      );
+    height: 1.5.h,
+    color: ColorManager.grey.withValues(alpha: 0.2),
+    thickness: 1.5.h,
+  );
   static const spacer = Spacer();
 }

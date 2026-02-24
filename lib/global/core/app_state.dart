@@ -4,7 +4,7 @@ import 'package:lms/global/utils/helper/console_logger.dart';
 import '../utils/helper/local_storage_helper.dart';
 
 class AppStateModel with ChangeNotifier {
-  bool _authenticated = false;
+  bool _authenticated  = false;
   String? _userToken;
   Locale _locale = const Locale("ar");
   // AuthModel? _userInfo;
@@ -43,6 +43,7 @@ class AppStateModel with ChangeNotifier {
     // _userInfo = storedUser;
     _userToken = storedToken;
     _locale = storedLocale;
+    _authenticated = (_userToken != null && _userToken!.isNotEmpty);
 
     // _authenticated = _userInfo != null &&
     //     _userToken != null &&

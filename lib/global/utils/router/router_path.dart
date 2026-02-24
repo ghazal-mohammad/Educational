@@ -1,11 +1,15 @@
 class RouterPath {
-  /// Auth routes
-  static String loginScreen = '/loginScreen';
-  static String registerScreen = '/registerScreen';
+  static const String loginScreen = '/login';
+  static const String submitOtpScreen = '/submitOtp';
+  static const String mainLayout = '/main';
 
-  /// Main routes
-  static String mainLayout = '/mainLayout';
-  static String homeScreen = '/homeScreen';
-  static String profileScreen = '/profileScreen';
-  static String settingsScreen = '/settingsScreen';
-}
+
+  static const String home = 'home';
+  static const String news = 'news';
+  static const String exercises = 'exercises';
+  static const String library = 'library';
+  static const String profile = 'profile';
+
+
+  }
+
