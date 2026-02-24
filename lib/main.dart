@@ -31,15 +31,12 @@ Future<void> main() async {
 
   EasyLocalization.logger.enableLevels = [level.EasyLogger().enableLevels[3]];
 
-  // Get saved locale before running app
-  final savedLocale = getIt<AppStateModel>().locale;
-
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translation',
-      startLocale: savedLocale,
-      fallbackLocale: const Locale('ar'),
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
       child: const MyApp(),
     ),
   );

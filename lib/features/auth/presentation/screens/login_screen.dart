@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../global/utils/router/router_path.dart';
@@ -34,6 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
+    final regex = RegExp(r'^09\d{8}$');
+    if (!regex.hasMatch(phone)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Phone number must match 09XXXXXXXX (10 digits)'),
+        ),
+      );
+      return;
+    }
+
     context.go(RouterPath.submitOtpScreen);
   }
 
@@ -52,19 +63,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 28.h),
-
                     Align(
                       alignment: Alignment.center,
-                      child: Image.asset(
-                        'assets/images/login_illustration.png',
+                      child: SvgPicture.asset(
+                        'assets/images/login_illustration.svg',
                         width: 206.w,
                         height: 206.h,
                         fit: BoxFit.contain,
                       ),
                     ),
-
                     SizedBox(height: 24.h),
-
                     Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -78,12 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-
-                    SizedBox(height: 20.h),
-
+                    const SizedBox(height: 12),
                     Text(
                       'Phone Number',
-                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 16.sp,
@@ -91,8 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: _purple,
                       ),
                     ),
-
-                    SizedBox(height: 8.h),
+                    const SizedBox(height: 8),
                     Directionality(
                       textDirection: TextDirection.ltr,
                       child: Container(
@@ -129,9 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-
                     SizedBox(height: 30.h),
-
                     SizedBox(
                       width: double.infinity,
                       height: 46.h,
@@ -155,7 +157,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-
                     SizedBox(height: 40.h),
                   ],
                 ),

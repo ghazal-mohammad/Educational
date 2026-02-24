@@ -1,13 +1,12 @@
 name: lms
 description: "LMS - Learning Management System"
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.5.4
-
 
 dependencies:
   flutter:
@@ -43,7 +42,6 @@ dependencies:
   path: ^1.9.0
   flutter_animate: ^4.5.2
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -55,17 +53,34 @@ dev_dependencies:
   # Automatically generate code for converting to and from JSON annotation Dart classes
   json_serializable: ^6.9.0
 
-
 flutter:
   uses-material-design: true
 
   assets:
     - assets/translation/
-    - assets/images/login_illustration.png
-    - assets/images/otp_illustration.png
-    - assets/icons/home.svg
-    - assets/icons/profile.svg
-    - assets/icons/exercise.svg
-    - assets/icons/library.svg
-    - assets/icons/news.svg
-    - assets/icons/Vector.svg
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: assets/fonts/Ubuntu/Ubuntu-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Ubuntu/Ubuntu-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Ubuntu/Ubuntu-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Ubuntu/Ubuntu-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Ubuntu/Ubuntu-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Ubuntu/Ubuntu-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Ubuntu/Ubuntu-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf
+          weight: 700
+          style: italic

@@ -81,8 +81,8 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
                   children: [
                     SizedBox(height: 28.h),
 
-                    Image.asset(
-                      'assets/images/otp_illustration.png',
+                    SvgPicture.asset(
+                      'assets/images/otp_illustration.svg',
                       width: 193.64.w,
                       height: 206.h,
                       fit: BoxFit.contain,
@@ -100,10 +100,7 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
                         color: _purple,
                       ),
                     ),
-
-                    SizedBox(height: 16.h),
-
-                    // ثابت مثل الصورة
+                    const SizedBox(height: 12),
                     Text(
                       'We sent a code to 09XXXXXXXX',
                       textAlign: TextAlign.center,
@@ -114,10 +111,7 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
                         color: _purple,
                       ),
                     ),
-
-                    SizedBox(height: 24.h),
-
-                    // 4 مربعات 52x52 + gap = 21 مثل Figma (61,134,207,280)
+                    const SizedBox(height: 8),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Directionality(
@@ -130,7 +124,8 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
                           cursorColor: _purple,
                           autoDisposeControllers: false,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          separatorBuilder: (context, index) => SizedBox(width: 21.w),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: 21.w),
                           textStyle: TextStyle(
                             fontFamily: 'Inter',
                             fontSize: 20.sp,
@@ -146,60 +141,60 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
                             inactiveColor: _border,
                             selectedColor: _border,
                             borderWidth: 1,
-                            activeFillColor: Colors.white.withValues(alpha: 0.86),
-                            inactiveFillColor: Colors.white.withValues(alpha: 0.86),
-                            selectedFillColor: Colors.white.withValues(alpha: 0.86),
+                            activeFillColor:
+                                Colors.white.withValues(alpha: 0.86),
+                            inactiveFillColor:
+                                Colors.white.withValues(alpha: 0.86),
+                            selectedFillColor:
+                                Colors.white.withValues(alpha: 0.86),
                           ),
                           enableActiveFill: true,
-                          onChanged: (value) => setState(() => currentText = value),
+                          onChanged: (value) =>
+                              setState(() => currentText = value),
                         ),
                       ),
                     ),
 
                     SizedBox(height: 12.h),
 
-                    // resend row: icon يسار + نص + عداد
-                    Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/Vector.svg',
-                            width: 19.w,
-                            height: 16.h,
-                            colorFilter: ColorFilter.mode(
-                              _muted.withValues(alpha: canResend ? 1.0 : 0.4),
-                              BlendMode.srcIn,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/Vector.svg',
+                          width: 19.w,
+                          height: 16.h,
+                          colorFilter: ColorFilter.mode(
+                            _muted.withValues(alpha: canResend ? 1.0 : 0.4),
+                            BlendMode.srcIn,
                           ),
-                          SizedBox(width: 6.w),
-                          GestureDetector(
-                            onTap: canResend ? _startTimer : null,
-                            child: Text(
-                              'Resend code',
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: _muted.withValues(
-                                  alpha: canResend ? 1.0 : 0.6,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Text(
-                            _timerText,
+                        ),
+                        SizedBox(width: 6.w),
+                        GestureDetector(
+                          onTap: canResend ? _startTimer : null,
+                          child: Text(
+                            'Resend code',
                             style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
-                              color: _muted,
+                              color: _muted.withValues(
+                                alpha: canResend ? 1.0 : 0.6,
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Text(
+                          _timerText,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: _muted,
+                          ),
+                        ),
+                      ],
                     ),
 
                     SizedBox(height: 24.h),
@@ -212,7 +207,8 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
                         onPressed: currentText.length == 4 ? _submit : null,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _purple,
-                          disabledBackgroundColor: _purple.withValues(alpha: 0.40),
+                          disabledBackgroundColor:
+                              _purple.withValues(alpha: 0.40),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(9.r),
                           ),

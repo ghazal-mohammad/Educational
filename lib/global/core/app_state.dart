@@ -6,7 +6,7 @@ import '../utils/helper/local_storage_helper.dart';
 class AppStateModel with ChangeNotifier {
   bool _authenticated  = false;
   String? _userToken;
-  Locale _locale = const Locale("ar");
+  Locale _locale = const Locale("en");
   // AuthModel? _userInfo;
 
   // AuthModel? get userInfo => _userInfo;

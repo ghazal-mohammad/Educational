@@ -24,8 +24,9 @@ class LocalizationCubit extends Cubit<LocalizationState> {
   }
 
   Future<void> fetchLocalization() async {
-    final locale = await LocalStorageHelper.getLocale();
-    await _setLocale(locale, null);
+    // final locale = await LocalStorageHelper.getLocale();
+    // await _setLocale(locale, null);
+    await _setLocale(const Locale('en'), null);
   }
 
   Future<void> setEnglish(BuildContext context) async {

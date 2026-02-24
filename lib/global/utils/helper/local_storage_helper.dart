@@ -16,7 +16,7 @@ abstract class LocalStorageHelper {
 
   /// **Retrieve Language**
   static Future<Locale> getLocale() async {
-    final String locale = Prefs.instance?.getString(MyKeys.locale) ?? 'ar';
+    final String locale = Prefs.instance?.getString(MyKeys.locale) ?? 'en';
     return Locale(locale);
   }
 

@@ -10,7 +10,7 @@ class LocalizationState {
   });
 
   const LocalizationState.initial()
-      : locale = const Locale('ar'),
+      : locale = const Locale('en'),
         isLoading = true;
 
   const LocalizationState.loading(this.locale) : isLoading = true;

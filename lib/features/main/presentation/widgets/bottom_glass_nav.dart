@@ -18,7 +18,7 @@ class BottomGlassNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = const <_NavItem>[
+    const items = <_NavItem>[
       _NavItem('Home', 'assets/icons/home.svg'),
       _NavItem('Exercises', 'assets/icons/exercise.svg'),
       _NavItem('News', 'assets/icons/news.svg'),
@@ -29,20 +29,17 @@ class BottomGlassNav extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 10.h),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(32.r),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
             child: Container(
-              height: 64.h,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.10), // glass
                 borderRadius: BorderRadius.circular(32.r),
-                // بدون بوردر (إذا كان عندك بوردر شيلو هون)
-                border: Border.all(color: Colors.transparent, width: 0),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(items.length, (i) {
@@ -77,18 +74,15 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ حل الـ overflow: حجم ثابت + FittedBox للنص
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(23.r),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOut,
-        width: selected ? 73.w : 54.w,
-        height: selected ? 49.h : 34.h,
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         decoration: BoxDecoration(
-          color: selected ? const Color(0x80B7A4C6) : Colors.transparent, // rgba(183,164,198,0.5)
+          color: selected ? const Color(0x80B7A4C6) : Colors.transparent,
           borderRadius: BorderRadius.circular(23.r),
         ),
         child: Column(
