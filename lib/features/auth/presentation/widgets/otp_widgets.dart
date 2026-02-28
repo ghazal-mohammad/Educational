@@ -18,14 +18,14 @@ class OtpHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CommonSizes(height: 70),
+        const CommonSizes(height: 250),
 
         SvgPicture.asset(
           AppAssets.otpIllustration,
-          height: 170.h,
+          height: 200.h,
         ),
 
-        const CommonSizes(height: 30),
+        const CommonSizes(height: 10),
 
         Text(
           'Verification Code',
@@ -37,7 +37,7 @@ class OtpHeader extends StatelessWidget {
           ),
         ),
 
-        const CommonSizes(height: 25),
+        const CommonSizes(height: 10),
       ],
     );
   }
@@ -178,7 +178,7 @@ class OtpButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(9.r)),
         ),
         child: isLoading
-            ? SizedBox(height: 20.h,
+            ? CommonSizes(height:2.h,
             width: 20.w,
             child: const CircularProgressIndicator(
                 color: Colors.white, strokeWidth: 2))
