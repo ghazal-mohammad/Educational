@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lms/global/design/common_sizes.dart';
 
 class BottomGlassNav extends StatelessWidget {
   const BottomGlassNav({
@@ -12,9 +13,6 @@ class BottomGlassNav extends StatelessWidget {
 
   final int currentIndex;
   final ValueChanged<int> onTap;
-
-  static const Color _purple = Color(0xFF331E53);
-  static const Color _bg = Color(0xFFFCF8FF);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class BottomGlassNav extends StatelessWidget {
             filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.10), // glass
+                color: Colors.white.withValues(alpha: 0.10), // glass
                 borderRadius: BorderRadius.circular(32.r),
               ),
               padding: const EdgeInsets.all(8),
@@ -94,15 +92,15 @@ class _NavButton extends StatelessWidget {
               width: selected ? 14.w : 18.w,
               height: selected ? 16.h : 18.h,
               colorFilter: ColorFilter.mode(
-                selected ? _purple : _purple.withOpacity(0.5),
+                selected ? _purple : _purple.withValues(alpha: 0.5),
                 BlendMode.srcIn,
               ),
             ),
-            SizedBox(height: selected ? 2.h : 0),
+            CommonSizes(height: selected ? 2.h : 0),
 
             // ✅ النص يظهر فقط للعنصر المحدد مثل الصورة + بدون overflow
             if (selected)
-              SizedBox(
+              CommonSizes(
                 height: 15.h,
                 child: FittedBox(
                   fit: BoxFit.scaleDown,

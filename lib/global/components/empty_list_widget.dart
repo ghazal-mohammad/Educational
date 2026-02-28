@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/global/design/common_sizes.dart';
 
 class EmptyListWidget extends StatelessWidget {
   final String? message;
@@ -22,7 +23,7 @@ class EmptyListWidget extends StatelessWidget {
             size: 60.sp,
             color: Colors.grey,
           ),
-          SizedBox(height: 16.h),
+          CommonSizes(height: 16.h),
           Text(
             message ?? 'No data found',
             textAlign: TextAlign.center,

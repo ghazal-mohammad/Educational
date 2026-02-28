@@ -24,12 +24,7 @@ Future<void> main() async {
   await Prefs.init();
   await getIt<AppStateModel>().init();
 
-  // final userInfo = getIt<AppStateModel>().userInfo;
-  // if (userInfo != null) {
-  //   printSuccess('User token: ${userInfo.token}');
-  // }
-
-  EasyLocalization.logger.enableLevels = [level.EasyLogger().enableLevels[3]];
+    EasyLocalization.logger.enableLevels = [level.EasyLogger().enableLevels[3]];
 
   runApp(
     EasyLocalization(

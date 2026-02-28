@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/global/design/common_sizes.dart';
 
 class ErrorWidgetScreen extends StatelessWidget {
   final String? message;
@@ -24,14 +25,14 @@ class ErrorWidgetScreen extends StatelessWidget {
               size: 60.sp,
               color: Colors.red,
             ),
-            SizedBox(height: 16.h),
+            CommonSizes(height: 16.h),
             Text(
               message ?? 'Something went wrong',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16.sp),
             ),
             if (onRetry != null) ...[
-              SizedBox(height: 16.h),
+              CommonSizes(height: 16.h),
               ElevatedButton(
                 onPressed: onRetry,
                 child: const Text('Retry'),
