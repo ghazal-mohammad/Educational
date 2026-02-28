@@ -116,13 +116,24 @@ class LoginForm extends StatelessWidget {
           builder: (context, state) {
             if (state is ErrorState) {
               return Padding(
-                padding: EdgeInsets.only(top: 8.h, left: 4.w),
-                child: Text(
-                  state.message,
-                  style: TextStyle(
-                    fontFamily: 'Ubuntu',
-                    color: Colors.purple.shade900,
-                    fontSize: 12.sp,
+                padding: EdgeInsets.only(top: 10.h, left: 4.w),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                  child: Text(
+                    state.message,
+                    style: TextStyle(
+                      fontFamily: 'Ubuntu',
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFFB7A4C6),
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withValues(alpha: 0.05),
+                          offset: const Offset(1.5, 1.5),
+                          blurRadius: 1.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
