@@ -39,27 +39,50 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
       child: BlocListener<SubmitOtpCubit, SubmitOtpState>(
         listener: (context, state) {
           if (state is SuccessState) {
-            context.go(RouterPath.mainLayout);
+            ScaffoldMessenger.of(context).clearSnackBars();
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                backgroundColor: const Color(0xFF331E53),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                duration: const Duration(milliseconds: 500),
+                content: Text(
+                  'Verified successfully',
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            );
+
+            Future.delayed(const Duration(milliseconds: 300), () {
+              if (!context.mounted) return;
+              context.go(RouterPath.mainLayout);
+            });
           }
         },
         child: Scaffold(
           backgroundColor: const Color(0xFFFCF8FF),
           body: SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
                 children: [
                   const OtpHeader(),
                   const CommonSizes(height: 8),
-
                   OtpForm(
                     controller: _cubit.otpController,
                     otpId: widget.otpId,
                     phone: widget.phone,
                   ),
-
                   const CommonSizes(height: 8),
-
                   BlocBuilder<SubmitOtpCubit, SubmitOtpState>(
                     builder: (context, state) {
                       return OtpTimerSection(
@@ -68,15 +91,12 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
                       );
                     },
                   ),
-
                   const CommonSizes(height: 30),
-
                   OtpButton(
                     onPressed: () {
                       context.go(RouterPath.mainLayout);
                     },
                   ),
-
                   const CommonSizes(height: 30),
                 ],
               ),
@@ -85,4 +105,5 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
         ),
       ),
     );
-  }}
+  }
+}
