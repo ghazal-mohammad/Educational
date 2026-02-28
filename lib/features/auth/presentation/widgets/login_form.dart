@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/global/design/common_sizes.dart';
+import '../../bloc/login_cubit.dart';
 
 class LoginForm extends StatelessWidget {
   final TextEditingController phoneController;
@@ -37,49 +39,59 @@ class LoginForm extends StatelessWidget {
         const CommonSizes(height: 12),
         Text(
           'Phone Number',
-          style: TextStyle(
-            fontFamily: 'Inter',
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: _purple,
-          ),
+          style: TextStyle(fontFamily: 'Inter', fontSize: 16.sp, color: _purple),
         ),
         const CommonSizes(height: 8),
         Directionality(
           textDirection: TextDirection.ltr,
           child: Container(
             height: 52.h,
-            width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.86),
               border: Border.all(color: _border, width: 2),
               borderRadius: BorderRadius.circular(8.r),
             ),
-            alignment: Alignment.centerLeft,
-            child: TextField(
-              controller: phoneController,
-              keyboardType: TextInputType.phone,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w400,
-                color: _purple,
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: '09XXXXXXXX',
-                hintStyle: TextStyle(
-                  color: _purple.withValues(alpha: 0.70),
-                  fontFamily: 'Inter',
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w400,
+            child: Row(
+              children: [
+                Text('+963', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: _purple)),
+                Icon(Icons.arrow_drop_down, color: _purple, size: 20.sp),
+                const CommonSizes(width: 8),
+                Container(width: 1, height: 20.h, color: _border.withValues(alpha: 0.5)),
+                const CommonSizes(width: 12),
+                Expanded(
+                  child: TextField(
+                    controller: phoneController,
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (_) => context.read<LoginCubit>().getOtp(),
+                    style: TextStyle(fontSize: 18.sp, color: _purple),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'XXXXXXXX',
+                      hintStyle: TextStyle(color: _purple.withValues(alpha: 0.70)),
+                      isCollapsed: true,
+                    ),
+                  ),
                 ),
-                isCollapsed: true,
-              ),
+              ],
             ),
           ),
+        ),
+        BlocBuilder<LoginCubit, LoginState>(
+          builder: (context, state) {
+            if (state is ErrorState) {
+              return Padding(
+                padding: EdgeInsets.only(top: 8.h, left: 4.w),
+                child: Text(
+                  state.message,
+                  style: TextStyle(fontFamily: 'Ubuntu', color: Colors.purple.shade900 , fontSize: 12.sp,
+                  ),
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
         ),
       ],
     );

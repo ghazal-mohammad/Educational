@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocProvider.value(
       value: _loginCubit,
       child: Scaffold(
-        backgroundColor: _bg,
+        backgroundColor: const Color(0xFFFCF8FF),
         body: SafeArea(
           child: Center(
             child: CommonSizes(
@@ -48,22 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: BlocListener<LoginCubit, LoginState>(
                     listener: (context, state) {
-                      if (state is ErrorState) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.message)),
-                        );
-                      } else if (state is SuccessState) {
-                        // الانتقال للـ OTP screen مع تمرير البيانات
+                      if (state is SuccessState) {
                         context.pushNamed(
                           RouterPath.submitOtp,
-                          extra: {
-                            'otpId': state.otpId,
-                            'phone': state.phone,
-                          },
+                          extra: {'otpId': state.otpId, 'phone': state.phone},
                         );
                       }
                     },
-
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -77,9 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           builder: (context, state) {
                             return LoginButton(
                               isLoading: state is LoadingState,
-                              onPressed: () {
-                                context.read<LoginCubit>().getOtp();
-                              },
+                              onPressed: () => context.read<LoginCubit>().getOtp(),
                             );
                           },
                         ),
@@ -94,6 +83,4 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-}
-
+  }}
