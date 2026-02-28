@@ -12,7 +12,11 @@ class SubmitOtpScreen extends StatefulWidget {
   final String otpId;
   final String phone;
 
-  const SubmitOtpScreen({super.key, required this.otpId, required this.phone});
+  const SubmitOtpScreen({
+    super.key,
+    required this.otpId,
+    required this.phone,
+  });
 
   @override
   State<SubmitOtpScreen> createState() => _SubmitOtpScreenState();
@@ -25,6 +29,7 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
   void initState() {
     super.initState();
     _cubit = getIt<SubmitOtpCubit>();
+    _cubit.startTimer();
   }
 
   @override
@@ -38,19 +43,27 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               children: [
-                OtpHeader(phone: widget.phone),
+                const OtpHeader(),
+                const CommonSizes(height: 8),
 
-                OtpForm(controller: _cubit.otpController, otpId: '', phone: '',),
-
-                const CommonSizes(height: 25),
+                OtpForm(
+                  controller: _cubit.otpController,
+                  otpId: widget.otpId,
+                  phone: widget.phone,
+                ),
+///////////////////////////////////////////////////////////////////////////////////////////
+                const CommonSizes(height: 8),
 
                 BlocBuilder<SubmitOtpCubit, SubmitOtpState>(
                   builder: (context, state) {
-                    return OtpTimerSection(timerText: _cubit.timerText);
+                    return OtpTimerSection(
+                      timerText: _cubit.timerText,
+                      phone: widget.phone,
+                    );
                   },
                 ),
 
-                const CommonSizes(height: 40),
+                const CommonSizes(height: 30),
 
                 OtpButton(
                   onPressed: () {

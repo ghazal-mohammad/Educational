@@ -1,44 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import 'package:lms/global/design/common_sizes.dart';
-import 'package:lms/global/utils/consts/assets.dart';
+import '../../../../global/utils/consts/assets.dart';
 import '../../bloc/submit_otp_cubit.dart';
 
 const Color _purpleDark = Color(0xFF331E53);
 const Color _purpleLightFill = Color(0xFFF4EFFF);
 const Color _purpleBorder = Color(0xFFB7A4C6);
-const Color _textMuted = Color(0xFF806D95);
 
 class OtpHeader extends StatelessWidget {
-  final String phone;
-  const OtpHeader({super.key, required this.phone});
+  const OtpHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CommonSizes(height: 50),
-        SvgPicture.asset(AppAssets.otpIllustration, height: 200.h),
+        const CommonSizes(height: 70),
+
+        SvgPicture.asset(
+          AppAssets.otpIllustration,
+          height: 170.h,
+        ),
+
         const CommonSizes(height: 30),
+
         Text(
           'Verification Code',
-          style: TextStyle(fontFamily: 'Ubuntu', fontSize: 22.sp, fontWeight: FontWeight.w700, color: _purpleDark),
+          style: TextStyle(
+            fontFamily: AppAssets.ubuntuFontFamily,
+            fontSize: 22.sp,
+            fontWeight: FontWeight.w700,
+            color: _purpleDark,
+          ),
         ),
-        const CommonSizes(height: 12),
-        Text(
-          'We sent a code to $phone', // ✅ تم حل خطأ widget.phone
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16.sp, color: _textMuted),
-        ),
+
+        const CommonSizes(height: 25),
       ],
     );
   }
 }
-
 class OtpForm extends StatelessWidget {
   final TextEditingController controller;
   final String otpId;
@@ -51,12 +54,19 @@ class OtpForm extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: PinCodeTextField(
+
         appContext: context,
         length: 4,
         controller: controller,
         keyboardType: TextInputType.number,
         cursorColor: _purpleDark,
-        textStyle: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, color: _purpleDark),
+
+        textStyle: TextStyle(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w700,
+          color: _purpleDark,
+          fontFamily: 'Ubuntu',
+        ),
         pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
           borderRadius: BorderRadius.circular(10.r),
@@ -81,37 +91,101 @@ class OtpForm extends StatelessWidget {
 
 class OtpTimerSection extends StatelessWidget {
   final String timerText;
-  const OtpTimerSection({super.key, required this.timerText});
+  final String phone;
+
+  const OtpTimerSection({
+    super.key,
+    required this.timerText,
+    required this.phone,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        Text('Resend code in ', style: TextStyle(color: _textMuted, fontSize: 14.sp)),
-        Text(timerText, style: TextStyle(color: _purpleDark, fontWeight: FontWeight.bold, fontSize: 14.sp)),
+
+        // ✅ السطر الأول: النص
+        Text(
+          'We sent a code to $phone',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Ubuntu',
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w500,
+            color: const Color(0xFFB7A4C6),
+          ),
+        ),
+
+        const CommonSizes(height: 10),
+
+        // ✅ السطر الثاني: الأيقونة + Resend + الوقت
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            SvgPicture.asset(
+              AppAssets.vectorIcon, // أيقونة الإعادة
+              height: 14.h,
+              width: 14.w,
+            ),
+
+            CommonSizes(width: 6.w),
+
+            Text(
+              'Resend',
+              style: TextStyle(
+                fontFamily: 'Ubuntu',
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w600,
+                color: _purpleDark,
+              ),
+            ),
+
+            CommonSizes(width: 6.w),
+
+            Text(
+              timerText,
+              style: TextStyle(
+                fontFamily: 'Ubuntu',
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w600,
+                color: _purpleDark,
+              ),
+            ),
+          ],
+        ),
+
+        const CommonSizes(height: 25),
       ],
     );
   }
 }
-
 class OtpButton extends StatelessWidget {
   final VoidCallback onPressed;
-  const OtpButton({super.key, required this.onPressed});
+  final bool isLoading;
+  const OtpButton({super.key, required this.onPressed, this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
     return CommonSizes(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: _purpleDark,
           padding: EdgeInsets.symmetric(vertical: 14.h),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9.r)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(9.r)),
         ),
-        child: const Text('SUBMIT', style: TextStyle(fontSize: 16, color: Colors.white)),
+        child: isLoading
+            ? SizedBox(height: 20.h,
+            width: 20.w,
+            child: const CircularProgressIndicator(
+                color: Colors.white, strokeWidth: 2))
+            : const Text(
+            'SUBMIT', style: TextStyle(fontSize: 16, color: Colors.white)),
       ),
     );
+
   }
 }

@@ -36,8 +36,8 @@ void dependencyInjectionSetup() {
       authRepository: getIt<AuthRepository>(),
     ),
   );
-  
+
   getIt.registerFactory<SubmitOtpCubit>(
-    () => SubmitOtpCubit(authRepository: getIt<AuthRepository>()),
+        () => SubmitOtpCubit(),
   );
 }

@@ -138,10 +138,11 @@ class LoginForm extends StatelessWidget {
                 ),
               );
             }
-            return const SizedBox.shrink();
-          },
+
+            return CommonSizes(height: 24.h);
+            },
         ),
-      ],
+      ]
     );
   }
 }
