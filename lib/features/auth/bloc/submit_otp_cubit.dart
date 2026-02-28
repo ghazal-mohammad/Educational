@@ -33,8 +33,17 @@ class SubmitOtpCubit extends Cubit<SubmitOtpState> {
   }
 
   Future<void> verifyOtp({required String otpId, required String phone}) async {
+    final code = otpController.text.trim();
+
+    if (code.length != 4) {
+      emit(ErrorState('OTP must be 4 digits'));
+      return;
+    }
+
     emit(LoadingState());
-    await Future.delayed(const Duration(seconds: 1));
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
     emit(SuccessState());
   }
 

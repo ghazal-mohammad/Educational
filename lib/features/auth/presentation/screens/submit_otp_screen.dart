@@ -36,47 +36,53 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _cubit,
-      child: Scaffold(
-        backgroundColor: const Color(0xFFFCF8FF),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Column(
-              children: [
-                const OtpHeader(),
-                const CommonSizes(height: 8),
+      child: BlocListener<SubmitOtpCubit, SubmitOtpState>(
+        listener: (context, state) {
+          if (state is SuccessState) {
+            context.go(RouterPath.mainLayout);
+          }
+        },
+        child: Scaffold(
+          backgroundColor: const Color(0xFFFCF8FF),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                children: [
+                  const OtpHeader(),
+                  const CommonSizes(height: 8),
 
-                OtpForm(
-                  controller: _cubit.otpController,
-                  otpId: widget.otpId,
-                  phone: widget.phone,
-                ),
-///////////////////////////////////////////////////////////////////////////////////////////
-                const CommonSizes(height: 8),
+                  OtpForm(
+                    controller: _cubit.otpController,
+                    otpId: widget.otpId,
+                    phone: widget.phone,
+                  ),
 
-                BlocBuilder<SubmitOtpCubit, SubmitOtpState>(
-                  builder: (context, state) {
-                    return OtpTimerSection(
-                      timerText: _cubit.timerText,
-                      phone: widget.phone,
-                    );
-                  },
-                ),
+                  const CommonSizes(height: 8),
 
-                const CommonSizes(height: 30),
+                  BlocBuilder<SubmitOtpCubit, SubmitOtpState>(
+                    builder: (context, state) {
+                      return OtpTimerSection(
+                        timerText: _cubit.timerText,
+                        phone: widget.phone,
+                      );
+                    },
+                  ),
 
-                OtpButton(
-                  onPressed: () {
-                    context.go(RouterPath.mainLayout);
-                  },
-                ),
+                  const CommonSizes(height: 30),
 
-                const CommonSizes(height: 30),
-              ],
+                  OtpButton(
+                    onPressed: () {
+                      context.go(RouterPath.mainLayout);
+                    },
+                  ),
+
+                  const CommonSizes(height: 30),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
-  }
-}
+  }}
