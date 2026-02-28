@@ -40,7 +40,7 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
               children: [
                 OtpHeader(phone: widget.phone),
 
-                OtpForm(controller: _cubit.otpController),
+                OtpForm(controller: _cubit.otpController, otpId: '', phone: '',),
 
                 const CommonSizes(height: 25),
 

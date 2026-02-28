@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-// استيرادات الطبقة العالمية للمشروع [1]
 import 'package:lms/global/design/common_sizes.dart';
 import 'package:lms/global/utils/consts/assets.dart';
+import '../../bloc/submit_otp_cubit.dart';
 
 const Color _purpleDark = Color(0xFF331E53);
 const Color _purpleLightFill = Color(0xFFF4EFFF);
@@ -25,25 +26,14 @@ class OtpHeader extends StatelessWidget {
         const CommonSizes(height: 30),
         Text(
           'Verification Code',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: 'Ubuntu',
-            fontSize: 22.sp,
-            fontWeight: FontWeight.w700,
-            color: _purpleDark,
-          ),
+          style: TextStyle(fontFamily: 'Ubuntu', fontSize: 22.sp, fontWeight: FontWeight.w700, color: _purpleDark),
         ),
         const CommonSizes(height: 12),
         Text(
-          'We sent a code to $phone',
+          'We sent a code to $phone', // ✅ تم حل خطأ widget.phone
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: _textMuted,
-          ),
+          style: TextStyle(fontSize: 16.sp, color: _textMuted),
         ),
-        const CommonSizes(height: 30),
       ],
     );
   }
@@ -51,7 +41,10 @@ class OtpHeader extends StatelessWidget {
 
 class OtpForm extends StatelessWidget {
   final TextEditingController controller;
-  const OtpForm({super.key, required this.controller});
+  final String otpId;
+  final String phone;
+
+  const OtpForm({super.key, required this.controller, required this.otpId, required this.phone});
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +56,7 @@ class OtpForm extends StatelessWidget {
         controller: controller,
         keyboardType: TextInputType.number,
         cursorColor: _purpleDark,
-        textStyle: TextStyle(
-          fontSize: 22.sp,
-          fontWeight: FontWeight.bold,
-          color: _purpleDark,
-        ),
+        textStyle: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, color: _purpleDark),
         pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
           borderRadius: BorderRadius.circular(10.r),
@@ -79,9 +68,11 @@ class OtpForm extends StatelessWidget {
           activeFillColor: _purpleLightFill,
           selectedFillColor: _purpleLightFill,
           inactiveFillColor: Colors.white,
-          borderWidth: 1,
         ),
         enableActiveFill: true,
+        onCompleted: (v) {
+          context.read<SubmitOtpCubit>().verifyOtp(otpId: otpId, phone: phone);
+        },
         onChanged: (v) {},
       ),
     );
@@ -97,18 +88,8 @@ class OtpTimerSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          'Resend code in ',
-          style: TextStyle(color: _textMuted, fontSize: 14.sp),
-        ),
-        Text(
-          timerText,
-          style: TextStyle(
-            color: _purpleDark,
-            fontWeight: FontWeight.bold,
-            fontSize: 14.sp,
-          ),
-        ),
+        Text('Resend code in ', style: TextStyle(color: _textMuted, fontSize: 14.sp)),
+        Text(timerText, style: TextStyle(color: _purpleDark, fontWeight: FontWeight.bold, fontSize: 14.sp)),
       ],
     );
   }
@@ -127,19 +108,9 @@ class OtpButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: _purpleDark,
           padding: EdgeInsets.symmetric(vertical: 14.h),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(9.r),
-          ),
-          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9.r)),
         ),
-        child: Text(
-          'SUBMIT',
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
+        child: const Text('SUBMIT', style: TextStyle(fontSize: 16, color: Colors.white)),
       ),
     );
   }
