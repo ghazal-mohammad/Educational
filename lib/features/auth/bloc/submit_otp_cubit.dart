@@ -1,104 +1,50 @@
 import 'dart:async';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-
-import '../auth_constants.dart';
-
-import '../data/models/index.dart';
-
-part 'submit_otp_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+abstract class SubmitOtpState {}
+class InitialState extends SubmitOtpState {}
+class LoadingState extends SubmitOtpState {}
+class SuccessState extends SubmitOtpState {}
+class ErrorState extends SubmitOtpState { final String message; ErrorState(this.message); }
 
 class SubmitOtpCubit extends Cubit<SubmitOtpState> {
-  // final AuthRepository authRepository;
-  final authRepository;
-
-  Timer? _timer;
-  static const int _initialSeconds = 54;
-
-  SubmitOtpCubit({required this.authRepository})
-      : super(const SubmitOtpState.initial()) {
-    _startTimer();
-  }
+  SubmitOtpCubit() : super(InitialState());
 
   final TextEditingController otpController = TextEditingController();
 
-  String get timerText => '00:${state.secondsLeft.toString().padLeft(2, "0")}';
+  Timer? _timer;
+  int _start = 60;
+  String timerText = "01:00";
 
-  void _startTimer() {
+  void startTimer() {
+    _start = 60;
     _timer?.cancel();
-
-    emit(state.copyWith(
-      secondsLeft: _initialSeconds,
-      canResend: false,
-    ));
-
-    _timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      final currentSeconds = state.secondsLeft;
-
-      if (currentSeconds <= 1) {
-        t.cancel();
-        emit(state.copyWith(
-          secondsLeft: 0,
-          canResend: true,
-        ));
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_start == 0) {
+        timer.cancel();
       } else {
-        emit(state.copyWith(
-          secondsLeft: currentSeconds - 1,
-          canResend: false,
-        ));
+        _start--;
+        int minutes = _start ~/ 60;
+        int seconds = _start % 60;
+        timerText = "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
+        emit(InitialState());
       }
     });
   }
 
-  void restartTimer() {
-    _startTimer();
-  }
-
-  bool _validateOtp(String otp) {
-    final pattern = r'^\d{' + kOtpCodeLength.toString() + r'}$';
-    final regex = RegExp(pattern);
-    return regex.hasMatch(otp);
-  }
-
-  String get currentOtp => otpController.text;
-
-  bool get isOtpComplete => otpController.text.length == kOtpCodeLength;
-
   Future<void> verifyOtp({required String otpId, required String phone}) async {
-    final otp = otpController.text.trim();
-    if (otp.isEmpty) {
-      emit(state.copyWith(errorMessage: 'Please enter OTP'));
-      return;
-    }
-    if (!_validateOtp(otp)) {
-      emit(state.copyWith(errorMessage: 'OTP must be $kOtpCodeLength digits'));
+    final code = otpController.text.trim();
+
+    if (code.length != 4) {
+      emit(ErrorState('OTP must be 4 digits'));
       return;
     }
 
-    emit(state.copyWith(isLoading: true, errorMessage: null));
-    try {
-      final response = await authRepository.verifyOtp(otpId: otpId, otp: otp);
-      if (response.success && response.token != null) {
-        emit(SubmitOtpState.success(token: response.token!, user: response.user));
-      } else {
-        emit(state.copyWith(
-          isLoading: false,
-          errorMessage: response.message,
-        ));
-      }
-    } catch (e) {
-      emit(state.copyWith(
-        isLoading: false,
-        errorMessage: 'Verification failed: ${e.toString()}',
-      ));
-    }
-  }
+    emit(LoadingState());
 
-  void clearError() {
-    if (state.errorMessage != null) {
-      emit(state.copyWith(errorMessage: null));
-    }
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    emit(SuccessState());
   }
 
   @override

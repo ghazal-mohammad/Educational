@@ -11,54 +11,50 @@ class LoginCubit extends Cubit<LoginState> {
 
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-
-  /// Validate phone number with regex pattern (09XXXXXXXX)
   bool _validatePhoneNumber(String phone) {
-    final regex = RegExp(r'^09\d{8}$');
+    final regex = RegExp(r'^9\d{8}$');
     return regex.hasMatch(phone);
   }
 
-  /// Get OTP - validates and submits phone number
   Future<void> getOtp() async {
     final phone = phoneController.text.trim();
 
-    // 1. Validate phone number
     if (phone.isEmpty || !_validatePhoneNumber(phone)) {
-      emit(const LoginState.error('Phone number must match 09XXXXXXXX'));
-      return;
+      if (phone.isEmpty || !_validatePhoneNumber(phone)) {
+        emit(const LoginState.error('Please enter a valid 9-digit mobile number'));
+        return;
+      }      return;
     }
 
     emit(const LoginState.loading());
-    
-    // 2. Simulate network delay
+
     await Future.delayed(const Duration(seconds: 1));
 
-    // 3. MOCK: Return fake success for testing UI/navigation flow
-    //    When real API is ready, replace with the commented code below
+    //  MOCK: نجاح وهمي لغرض فحص التنقل (Navigation)
+    // عند جهوزية الـ API الحقيقي، يتم إلغاء التعليق عن الكود أدناه
     emit(LoginState.success(
       otpId: 'fake_id_${phone}_${DateTime.now().millisecondsSinceEpoch}',
-      phone: phone,
+      phone: '+963$phone',
     ));
 
-    /* REAL API CODE (for when backend is ready):
+    /* كود الـ API الحقيقي (عند توفر الربط):
     try {
-      final response = await authRepository.requestOtp(phone);
-      
+      final response = await authRepository.requestOtp('+963$phone');
+
       if (response.success && response.otp != null) {
         emit(LoginState.success(
           otpId: response.otp!.otpId,
-          phone: phone,
+          phone: '+963$phone',
         ));
       } else {
         emit(LoginState.error(response.message));
       }
     } catch (e) {
-      emit(LoginState.error('Failed to get OTP: ${e.toString()}'));
+      emit(LoginState.error('فشل في طلب الرمز: ${e.toString()}'));
     }
     */
   }
 
-  /// Clear error state
   void clearError() {
     if (state is ErrorState) {
       emit(const LoginState.initial());

@@ -6,8 +6,8 @@ import 'package:lms/global/design/common_sizes.dart';
 import 'package:lms/global/utils/di/dependency_injection.dart';
 
 import '../../../../global/utils/router/router_path.dart';
+import '../../bloc/login_cubit.dart';
 import '../widgets/index.dart';
-import '../../bloc/index.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -48,22 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: BlocListener<LoginCubit, LoginState>(
                     listener: (context, state) {
-                      if (state is ErrorState) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.message)),
-                        );
-                      } else if (state is SuccessState) {
-                        // الانتقال للـ OTP screen مع تمرير البيانات
+                      if (state is SuccessState) {
                         context.pushNamed(
                           RouterPath.submitOtp,
-                          extra: {
-                            'otpId': state.otpId,
-                            'phone': state.phone,
-                          },
+                          extra: {'otpId': state.otpId, 'phone': state.phone},
                         );
                       }
                     },
-
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -77,9 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           builder: (context, state) {
                             return LoginButton(
                               isLoading: state is LoadingState,
-                              onPressed: () {
-                                context.read<LoginCubit>().getOtp();
-                              },
+                              onPressed: () => context.read<LoginCubit>().getOtp(),
                             );
                           },
                         ),
@@ -96,4 +85,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

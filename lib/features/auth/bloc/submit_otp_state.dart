@@ -1,4 +1,7 @@
-part of 'submit_otp_cubit.dart';
+
+import 'package:flutter/cupertino.dart';
+
+import '../data/models/login_models.dart';
 
 @immutable
 class SubmitOtpState {

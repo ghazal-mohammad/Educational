@@ -16,7 +16,6 @@ class LoginRequestModel {
   String toString() => 'LoginRequestModel(phone: $phone)';
 }
 
-/// Response model من الـ login API
 class LoginResponseModel {
   final bool success;
   final String message;
@@ -60,7 +59,7 @@ class LoginResponseModel {
 class OtpModel {
   final String otpId;
   final String phone;
-  final int expiresIn; // بالثواني
+  final int expiresIn;
   final DateTime createdAt;
 
   OtpModel({
