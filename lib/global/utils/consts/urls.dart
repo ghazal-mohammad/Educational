@@ -1,17 +1,19 @@
 class Urls {
-  /// Base API URL - تأكد من تحديث هذا مع عنوان الخادم الفعلي
-  /// TODO: Replace with your actual API server URL
-  /// Example: 'https://api.example.com/api/v1'
-  static const String baseUrl = 'https://your-api.com/api';
+  // TODO: Change this to your actual base URL
+  static String baseUrl = 'https://widespheres.com/api';
 
   /// Auth
+  static String test_auth = '/test-auth-key';
+  
   static String loginUrl = '/auth/login';
   static String registerUrl = '/auth/register';
   static String logoutUrl = '/auth/logout';
-  static String verifyOtpUrl = '/auth/verify-otp';
   static String getProfile = '/user/profile';
   static String updateProfileUrl = '/user/profile';
+  static String verifyOtpUrl = '';
 
   /// Home
   static String homeUrl = '/home';
+
+  //static String get  => null;
 }

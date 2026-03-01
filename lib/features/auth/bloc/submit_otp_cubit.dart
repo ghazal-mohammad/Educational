@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 import '../auth_constants.dart';
 
-import '../data/repositories/auth_repository.dart';
 import '../data/models/index.dart';
 
 part 'submit_otp_state.dart';
 
 class SubmitOtpCubit extends Cubit<SubmitOtpState> {
-  final AuthRepository authRepository;
+  // final AuthRepository authRepository;
+  final authRepository;
 
   Timer? _timer;
   static const int _initialSeconds = 54;

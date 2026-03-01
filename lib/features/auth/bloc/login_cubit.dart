@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../data/repositories/auth_repository.dart';
-
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  final AuthRepository authRepository;
+  // final AuthRepository authRepository;
+  // final  authRepository;
 
-  LoginCubit({required this.authRepository}) : super(const LoginState.initial());
+  LoginCubit() : super(const LoginState.initial());
 
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();

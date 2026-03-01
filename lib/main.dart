@@ -19,6 +19,7 @@ final GlobalKey<NavigatorState> navigatorTestKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   dependencyInjectionSetup();
+  
   await EasyLocalization.ensureInitialized();
   await DioHelper.init();
   await Prefs.init();
