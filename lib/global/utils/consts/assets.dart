@@ -21,4 +21,8 @@ class AppAssets {
 
   ///fonts
   static const String ubuntuFontFamily = 'Ubuntu';
+
+  //messages
+  static const String trueIcon = '$_iconsPath/messages/true_icon.png';
+  static const String falseIcon = '$_iconsPath/messages/false_icon.png';
 }
