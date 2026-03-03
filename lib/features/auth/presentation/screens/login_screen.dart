@@ -6,7 +6,8 @@ import 'package:lms/global/design/common_sizes.dart';
 import 'package:lms/global/utils/di/dependency_injection.dart';
 
 import '../../../../global/utils/router/router_path.dart';
-import '../../bloc/login_cubit.dart';
+import '../../bloc/login/login_cubit.dart';
+import '../../bloc/login_state.dart';
 import '../widgets/index.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -48,12 +49,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: BlocListener<LoginCubit, LoginState>(
                     listener: (context, state) {
-                      if (state is SuccessState) {
-                        context.pushNamed(
-                          RouterPath.submitOtp,
-                          extra: {'otpId': state.otpId, 'phone': state.phone},
-                        );
-                      }
+                      state.maybeWhen(
+                        success: (otpId, phone) {
+                          context.pushNamed(
+                            RouterPath.submitOtp,
+                            extra: {'otpId': otpId, 'phone': phone},
+                          );
+                        },
+                        orElse: () {},
+                      );
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,11 +68,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           phoneController: _loginCubit.phoneController,
                           formKey: _loginCubit.loginFormKey,
                         ),
+
                         BlocBuilder<LoginCubit, LoginState>(
                           builder: (context, state) {
+                            final isLoading = state.maybeWhen(
+                              loading: () => true,
+                              orElse: () => false,
+                            );
                             return LoginButton(
-                              isLoading: state is LoadingState,
-                              onPressed: () => context.read<LoginCubit>().getOtp(),
+                              isLoading: isLoading,
+                              onPressed: () =>
+                                  context.read<LoginCubit>().getOtp(),
                             );
                           },
                         ),

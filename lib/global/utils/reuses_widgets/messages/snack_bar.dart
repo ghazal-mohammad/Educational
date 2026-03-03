@@ -24,10 +24,14 @@ void snackBar({
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           decoration: BoxDecoration(
-            color: isErrorMessage ? const Color(0xffFFF5F3) : Colors.green[100],
+            color: isErrorMessage
+                ? const Color(0xffFFF5F3)
+                : const Color(0xFFF4EFFF), // موف فاتح للنجاح
             borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
-              color: isErrorMessage ? const Color(0xffF4B0A1) : Colors.green,
+              color: isErrorMessage
+                  ? const Color(0xffF4B0A1)
+                  : const Color(0xFF331E53), // موف غامق للحواف
               width: 2,
             ),
           ),
@@ -40,7 +44,9 @@ void snackBar({
                   child: Image.asset(
                     isErrorMessage ? AppAssets.falseIcon : AppAssets.trueIcon,
                     scale: 2.9,
-                    color: isErrorMessage ? Utils(context).red : const Color(0xff1daa61),
+                    color: isErrorMessage
+                        ? Utils(context).red
+                        : const Color(0xFF331E53), // موف بدل الأخضر
                   ))
                   : icon ?? const SizedBox(),
               SizedBox(width: 10.w),

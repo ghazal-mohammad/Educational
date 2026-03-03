@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:lms/global/design/common_sizes.dart';
 import '../../../../global/utils/consts/assets.dart';
-import '../../bloc/submit_otp_cubit.dart';
+import '../../bloc/otp/submit_otp_cubit.dart';
 
 const Color _purpleDark = Color(0xFF331E53);
 const Color _purpleLightFill = Color(0xFFF4EFFF);

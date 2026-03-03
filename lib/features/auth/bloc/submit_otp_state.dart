@@ -1,71 +1,41 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:flutter/cupertino.dart';
+part 'submit_otp_state.freezed.dart';
 
-import '../data/models/login_models.dart';
-
-@immutable
-class SubmitOtpState {
-  final bool isLoading;
-  final String? errorMessage;
-  final String? token;
-  final UserAuthModel? user;
-  final int secondsLeft;
-  final bool canResend;
-
-  const SubmitOtpState({
-    required this.isLoading,
-    this.errorMessage,
-    this.token,
-    this.user,
-    this.secondsLeft = 54,
-    this.canResend = false,
-  });
-
-  const SubmitOtpState.initial()
-      : isLoading = false,
-        errorMessage = null,
-        token = null,
-        user = null,
-        secondsLeft = 54,
-        canResend = false;
-
-  const SubmitOtpState.loading()
-      : isLoading = true,
-        errorMessage = null,
-        token = null,
-        user = null,
-        secondsLeft = 54,
-        canResend = false;
-
-  const SubmitOtpState.success({required this.token, this.user})
-      : isLoading = false,
-        errorMessage = null,
-        secondsLeft = 54,
-        canResend = false;
-
-  const SubmitOtpState.error(String message, {int? secondsLeft, bool? canResend})
-      : isLoading = false,
-        errorMessage = message,
-        token = null,
-        user = null,
-        secondsLeft = secondsLeft ?? 54,
-        canResend = canResend ?? false;
-
-  SubmitOtpState copyWith({
-    bool? isLoading,
+@freezed
+class SubmitOtpState with _$SubmitOtpState {
+  const factory SubmitOtpState.initial({
+    @Default(false) bool isLoading,
     String? errorMessage,
     String? token,
-    UserAuthModel? user,
-    int? secondsLeft,
-    bool? canResend,
-  }) {
-    return SubmitOtpState(
-      isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
-      token: token ?? this.token,
-      user: user ?? this.user,
-      secondsLeft: secondsLeft ?? this.secondsLeft,
-      canResend: canResend ?? this.canResend,
-    );
-  }
+    Map<String, dynamic>? user,
+    @Default(54) int secondsLeft,
+    @Default(false) bool canResend,
+  }) = _Initial;
+
+  const factory SubmitOtpState.loading({
+    @Default(true) bool isLoading,
+    String? errorMessage,
+    String? token,
+    Map<String, dynamic>? user,
+    @Default(54) int secondsLeft,
+    @Default(false) bool canResend,
+  }) = _Loading;
+
+  const factory SubmitOtpState.success({
+    required String token,
+    Map<String, dynamic>? user,
+    @Default(false) bool isLoading,
+    @Default(54) int secondsLeft,
+    @Default(false) bool canResend,
+  }) = _Success;
+
+  const factory SubmitOtpState.error(
+    String message, {
+    @Default(false) bool isLoading,
+    String? token,
+    Map<String, dynamic>? user,
+    @Default(54) int secondsLeft,
+    @Default(false) bool canResend,
+  }) = _Error;
 }
