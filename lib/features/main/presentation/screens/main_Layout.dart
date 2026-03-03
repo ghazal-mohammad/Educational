@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/features/home/presentation/screens/home_screen.dart';
 
 import '../widgets/bottom_glass_nav.dart';
 
@@ -13,8 +14,17 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int _selectedIndex = 0;
 
+  // final List<String> _routes = [
+  //   RouterPath.home,
+  //   RouterPath.exercises,
+  //   RouterPath.news,
+  //   RouterPath.library,
+  //   RouterPath.profile,
+  // ];
+
+
   final List<Widget> _screens = const [
-    _DummyScreen(title: 'Home'),
+     HomeScreen(),
     _DummyScreen(title: 'Exercises'),
     _DummyScreen(title: 'News'),
     _DummyScreen(title: 'Library'),

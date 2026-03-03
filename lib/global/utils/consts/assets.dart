@@ -10,6 +10,7 @@ class AppAssets {
 
   ///images
   static const String _imagesPath = 'assets/images';
+  // Images
   static const String logo = 'assets/images/logo.png';
   static const String loginIllustration = '$_imagesPath/login_illustration.svg';
   static const String otpIllustration = '$_imagesPath/otp_illustration.svg';

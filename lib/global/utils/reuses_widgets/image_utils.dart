@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lms/global/design/common_sizes.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../consts/assets.dart';
@@ -167,7 +166,7 @@ class ImageUtils extends StatelessWidget {
 
   Widget _finalBuilder(Widget imageWidget) {
     if (isCircular) {
-      return CommonSizes(
+      return SizedBox(
         width: width,
         height: height,
         child: ClipOval(child: imageWidget),
