@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/usecases/verify_otp_usecase.dart';
 import '../submit_otp_state.dart';
 
 class SubmitOtpCubit extends Cubit<SubmitOtpState> {
-  SubmitOtpCubit() : super(const SubmitOtpState.initial());
+  final VerifyOtpUseCase _verifyOtp;
+
+  SubmitOtpCubit(this._verifyOtp) : super(const SubmitOtpState.initial());
 
   final TextEditingController otpController = TextEditingController();
 
@@ -41,9 +44,23 @@ class SubmitOtpCubit extends Cubit<SubmitOtpState> {
 
     emit(const SubmitOtpState.loading());
 
-    await Future.delayed(const Duration(milliseconds: 500));
+    final result = await _verifyOtp(
+      otpId: otpId,
+      phone: phone,
+      code: code,
+    );
 
-    emit(const SubmitOtpState.success(token: 'mock-token'));
+    result.when(
+      success: (response) {
+        emit(SubmitOtpState.success(
+          token: response.token ?? '',
+          user: response.user,
+        ));
+      },
+      failure: (error) {
+        emit(SubmitOtpState.error(error.message));
+      },
+    );
   }
 
   @override

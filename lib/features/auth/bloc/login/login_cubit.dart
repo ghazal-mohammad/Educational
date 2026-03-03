@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/models/login_request_model.dart';
+import '../../domain/usecases/request_otp_usecase.dart';
 import '../login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  // final AuthRepository authRepository;
+  final RequestOtpUseCase _requestOtp;
 
-  LoginCubit() : super(const LoginState.initial());
+  LoginCubit(this._requestOtp) : super(const LoginState.initial());
 
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
@@ -26,12 +28,24 @@ class LoginCubit extends Cubit<LoginState> {
 
     emit(const LoginState.loading());
 
-    await Future.delayed(const Duration(seconds: 1));
+    final request = LoginRequestModel(phone: '+963$phone');
+    final result = await _requestOtp(request);
 
-    emit(LoginState.success(
-      otpId: 'fake_id_${phone}_${DateTime.now().millisecondsSinceEpoch}',
-      phone: '+963$phone',
-    ));
+    result.when(
+      success: (response) {
+        // لما يصير في OTP حقيقي، بنقرأه من response.otp
+        final otpId =
+            response.otp?.otpId ?? 'fake_id_${phone}_${DateTime.now().millisecondsSinceEpoch}';
+
+        emit(LoginState.success(
+          otpId: otpId,
+          phone: '+963$phone',
+        ));
+      },
+      failure: (error) {
+        emit(LoginState.error(error.message));
+      },
+    );
   }
 
   void clearError() {
