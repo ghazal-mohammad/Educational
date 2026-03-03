@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/global/design/common_sizes.dart';
-import '../../bloc/login_cubit.dart';
+import '../../bloc/login/login_cubit.dart';
+import '../../bloc/login_state.dart';
 
 class LoginForm extends StatelessWidget {
   final TextEditingController phoneController;
@@ -114,33 +115,35 @@ class LoginForm extends StatelessWidget {
         ),
         BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {
-            if (state is ErrorState) {
+            final errorMessage = state.maybeWhen(
+              error: (message) => message,
+              orElse: () => null,
+            );
+
+            if (errorMessage != null) {
               return Padding(
                 padding: EdgeInsets.only(top: 10.h, left: 4.w),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                  child: Text(
-                    state.message,
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFFB7A4C6),
-                      shadows: [
-                        Shadow(
-                          color: Colors.black.withValues(alpha: 0.05),
-                          offset: const Offset(1.5, 1.5),
-                          blurRadius: 1.0,
-                        ),
-                      ],
-                    ),
+                child: Text(
+                  errorMessage,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFFB7A4C6),
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withValues(alpha: 0.05),
+                        offset: const Offset(1.5, 1.5),
+                        blurRadius: 1.0,
+                      ),
+                    ],
                   ),
                 ),
               );
             }
 
-            return CommonSizes(height: 24.h);
-            },
+            return const CommonSizes(height: 24);
+          },
         ),
       ]
     );

@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:lms/global/design/common_sizes.dart';
 import 'package:lms/global/utils/di/dependency_injection.dart';
 import 'package:lms/global/utils/router/router_path.dart';
-import '../../bloc/submit_otp_cubit.dart';
+import 'package:lms/global/utils/reuses_widgets/messages/snack_bar.dart';
+import '../../bloc/otp/submit_otp_cubit.dart';
+import '../../bloc/submit_otp_state.dart';
 import '../widgets/otp_widgets.dart';
 
 class SubmitOtpScreen extends StatefulWidget {
@@ -38,35 +40,21 @@ class _SubmitOtpScreenState extends State<SubmitOtpScreen> {
       value: _cubit,
       child: BlocListener<SubmitOtpCubit, SubmitOtpState>(
         listener: (context, state) {
-          if (state is SuccessState) {
-            ScaffoldMessenger.of(context).clearSnackBars();
+          state.maybeWhen(
+            success: (token, user, isLoading, secondsLeft, canResend) {
+              snackBar(
+                context: context,
+                title: 'Verified successfully',
+                isErrorMessage: false,
+              );
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                behavior: SnackBarBehavior.floating,
-                margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-                backgroundColor: const Color(0xFF331E53),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                duration: const Duration(milliseconds: 500),
-                content: Text(
-                  'Verified successfully',
-                  style: TextStyle(
-                    fontFamily: 'Ubuntu',
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            );
-
-            Future.delayed(const Duration(milliseconds: 300), () {
-              if (!context.mounted) return;
-              context.go(RouterPath.mainLayout);
-            });
-          }
+              Future.delayed(const Duration(milliseconds: 300), () {
+                if (!context.mounted) return;
+                context.go(RouterPath.mainLayout);
+              });
+            },
+            orElse: () {},
+          );
         },
         child: Scaffold(
           backgroundColor: const Color(0xFFFCF8FF),

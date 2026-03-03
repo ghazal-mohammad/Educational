@@ -1,23 +1,16 @@
-import '../models/index.dart';
+import 'package:lms/global/networking/result_freezed.dart';
 
-/// Abstract repository للـ authentication
+import '../models/login_request_model.dart';
+import '../models/login_response_model.dart';
+import '../models/otp_response_model.dart';
+
 abstract class AuthRepository {
-  /// طلب OTP
-  Future<LoginResponseModel> requestOtp(String phone);
+  Future<Result<LoginResponseModel>> requestOtp(LoginRequestModel request);
 
-  /// التحقق من OTP
-  Future<LoginResponseModel> verifyOtp({
+  Future<Result<OtpResponseModel>> verifyOtp({
     required String otpId,
-    required String otp,
-  });
-
-  /// تسجيل مستخدم جديد
-  Future<LoginResponseModel> register({
     required String phone,
-    required String name,
-    required String email,
+    required String code,
   });
-
-  /// تسجيل الخروج
-  Future<void> logout();
 }
+

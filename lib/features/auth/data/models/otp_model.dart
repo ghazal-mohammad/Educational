@@ -1,24 +1,23 @@
 // ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'user_model.freezed.dart';
-part 'user_model.g.dart';
+
+part 'otp_model.freezed.dart';
+part 'otp_model.g.dart';
 
 @freezed
-class UserModel with _$UserModel {
-  const factory UserModel({
-    @Default('') String id,
+class OtpModel with _$OtpModel {
+  const factory OtpModel({
+    @Default('') String otpId,
     @Default('') String phone,
-    String? name,
-    String? email,
-    String? profileImage,
-    @Default(false) bool isVerified,
+    @Default(300) int expiresIn,
     @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
     required DateTime createdAt,
-  }) = _UserModel;
+  }) = _OtpModel;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory OtpModel.fromJson(Map<String, dynamic> json) => _$OtpModelFromJson(json);
 }
+
 DateTime _dateTimeFromJson(dynamic value) {
   if (value == null) return DateTime.now();
   if (value is String) return DateTime.tryParse(value) ?? DateTime.now();

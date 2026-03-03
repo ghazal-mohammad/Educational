@@ -1,60 +1,47 @@
-import '../datasources/index.dart';
-import '../models/index.dart';
+import 'package:lms/global/networking/result_freezed.dart';
+
+import '../../../../global/networking/dio_helper.dart';
+import '../../../../global/utils/consts/urls.dart';
+import '../models/login_request_model.dart';
+import '../models/login_response_model.dart';
+import '../models/otp_response_model.dart';
 import 'auth_repository.dart';
 
-/// تطبيق الـ authentication repository
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource remoteDataSource;
-
-  AuthRepositoryImpl({required this.remoteDataSource});
+  const AuthRepositoryImpl();
 
   @override
-  Future<LoginResponseModel> requestOtp(String phone) async {
-    try {
-      return await remoteDataSource.requestOtp(phone);
-    } catch (e) {
-      rethrow;
-    }
+  Future<Result<LoginResponseModel>> requestOtp(
+      LoginRequestModel request) async {
+    // TODO: استخدم DioHelper.postModel مع Urls.authLogin لما يكون الـ API جاهز
+    // حالياً: محاكاة نفس اللي كنا نعمله بالـ cubit (mock) لكن ضمن Repository
+    final mockResponse = LoginResponseModel(
+      success: true,
+      message: 'OTP sent successfully',
+      otp: null,
+      token: null,
+      user: null,
+    );
+
+    return Result.success(mockResponse);
   }
 
   @override
-  Future<LoginResponseModel> verifyOtp({
+  Future<Result<OtpResponseModel>> verifyOtp({
     required String otpId,
-    required String otp,
-  }) async {
-    try {
-      return await remoteDataSource.verifyOtp(
-        otpId: otpId,
-        otp: otp,
-      );
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<LoginResponseModel> register({
     required String phone,
-    required String name,
-    required String email,
+    required String code,
   }) async {
-    try {
-      return await remoteDataSource.register(
-        phone: phone,
-        name: name,
-        email: email,
-      );
-    } catch (e) {
-      rethrow;
-    }
-  }
+    // TODO: استخدم DioHelper.postModel مع Urls.verifyOtp لما يكون الـ API جاهز
+    // حالياً: محاكاة نجاح بسيط
+    const mockResponse = OtpResponseModel(
+      success: true,
+      message: 'Verified successfully',
+      token: 'mock-token',
+      user: null,
+    );
 
-  @override
-  Future<void> logout() async {
-    try {
-      await remoteDataSource.logout();
-    } catch (e) {
-      rethrow;
-    }
+    return const Result.success(mockResponse);
   }
 }
+

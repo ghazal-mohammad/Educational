@@ -1,37 +1,14 @@
-part of 'login_cubit.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class LoginState {
-  const LoginState();
+part 'login_state.freezed.dart';
 
-  const factory LoginState.initial() = InitialState;
-  const factory LoginState.loading() = LoadingState;
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState.initial() = _Initial;
+  const factory LoginState.loading() = _Loading;
   const factory LoginState.success({
     required String otpId,
     required String phone,
-  }) = SuccessState;
-  const factory LoginState.error(String message) = ErrorState;
-}
-
-class InitialState extends LoginState {
-  const InitialState();
-}
-
-class LoadingState extends LoginState {
-  const LoadingState();
-}
-
-class SuccessState extends LoginState {
-  final String otpId;
-  final String phone;
-
-  const SuccessState({
-    required this.otpId,
-    required this.phone,
-  });
-}
-
-class ErrorState extends LoginState {
-  final String message;
-
-  const ErrorState(this.message);
+  }) = _Success;
+  const factory LoginState.error(String message) = _Error;
 }
