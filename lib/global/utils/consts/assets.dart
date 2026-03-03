@@ -2,6 +2,11 @@ class AppAssets {
   ///icons
   static const String _iconsPath = 'assets/icons';
   static const String homeIcon = '$_iconsPath/home.svg';
+  static const String notificationicon = '$_iconsPath/notification.svg';
+    static const String carticon = '$_iconsPath/cart.svg';
+    static const String search = '$_iconsPath/search.svg';
+
+
   static const String newsIcon = '$_iconsPath/news.svg';
   static const String exerciseIcon = '$_iconsPath/exercise.svg';
   static const String libraryIcon = '$_iconsPath/library.svg';
@@ -13,6 +18,10 @@ class AppAssets {
   // Images
   static const String logo = 'assets/images/logo.png';
   static const String loginIllustration = '$_imagesPath/login_illustration.svg';
+  static const String frame = '$_imagesPath/Frame.svg';
+  static const String im1 = '$_imagesPath/im1.jpg';
+
+
   static const String otpIllustration = '$_imagesPath/otp_illustration.svg';
 
   ///translation
