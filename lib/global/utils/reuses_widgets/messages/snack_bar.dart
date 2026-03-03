@@ -27,13 +27,21 @@ void snackBar({
             color: isErrorMessage
                 ? const Color(0xffFFF5F3)
                 : const Color(0xFFF4EFFF), // موف فاتح للنجاح
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(14.r),
             border: Border.all(
               color: isErrorMessage
                   ? const Color(0xffF4B0A1)
                   : const Color(0xFF331E53), // موف غامق للحواف
-              width: 2,
+              width: 1.5,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.06),
+                offset: const Offset(0, 6),
+                blurRadius: 18,
+                spreadRadius: 1,
+              ),
+            ],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,

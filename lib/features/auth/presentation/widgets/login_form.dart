@@ -123,30 +123,26 @@ class LoginForm extends StatelessWidget {
             if (errorMessage != null) {
               return Padding(
                 padding: EdgeInsets.only(top: 10.h, left: 4.w),
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                  child: Text(
-                    errorMessage,
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFFB7A4C6),
-                      shadows: [
-                        Shadow(
-                          color: Colors.black.withValues(alpha: 0.05),
-                          offset: const Offset(1.5, 1.5),
-                          blurRadius: 1.0,
-                        ),
-                      ],
-                    ),
+                child: Text(
+                  errorMessage,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFFB7A4C6),
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withValues(alpha: 0.05),
+                        offset: const Offset(1.5, 1.5),
+                        blurRadius: 1.0,
+                      ),
+                    ],
                   ),
                 ),
               );
             }
 
-            return CommonSizes(height: 24.h);
+            return const CommonSizes(height: 24);
           },
         ),
       ]

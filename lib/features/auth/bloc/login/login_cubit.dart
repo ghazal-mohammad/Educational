@@ -22,7 +22,8 @@ class LoginCubit extends Cubit<LoginState> {
     final phone = phoneController.text.trim();
 
     if (phone.isEmpty || !_validatePhoneNumber(phone)) {
-      emit(const LoginState.error('Please enter a valid 9-digit mobile number'));
+      emit(const LoginState.error(
+          'Please enter a valid Syrian mobile number: 9XXXXXXXX'));
       return;
     }
 
