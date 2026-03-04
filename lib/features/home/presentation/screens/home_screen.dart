@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 20.0.w),
             child: Column(
               children: [
-                HomeHeader(),
+                const HomeHeader(),
                 SearchSection(controller: _searchController),
                 const CommonSizes(height: 18),
                 const ContinueLearningSection(),
