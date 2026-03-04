@@ -1,8 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:lms/global/networking/dio_helper.dart';
-
-import '../../../features/auth/bloc/login_cubit.dart';
-import '../../../features/auth/bloc/submit_otp_cubit.dart';
 import '../../bloc/localization_bloc/localization_cubit.dart';
 import '../../bloc/theme_bloc/theme_bloc.dart';
 import '../../core/app_state.dart';
@@ -21,7 +18,12 @@ void dependencyInjectionSetup() {
   /// Providers setup
   getIt.registerLazySingleton<AppStateModel>(() => AppStateModel());
 
-  getIt.registerFactory<LoginCubit>(() => LoginCubit());
+  /// Auth layer
+  // getIt.registerLazySingleton<AuthRepository>(() => const AuthRepositoryImpl());
 
-  getIt.registerFactory<SubmitOtpCubit>(() => SubmitOtpCubit());
+  // getIt.registerFactory<LoginCubit>(
+  //     () => LoginCubit(getIt<RequestOtpUseCase>()));
+  //
+  // getIt.registerFactory<SubmitOtpCubit>(
+  //     () => SubmitOtpCubit(getIt<VerifyOtpUseCase>()));
 }

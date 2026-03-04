@@ -1,19 +1,18 @@
 class Urls {
   // TODO: Change this to your actual base URL
-  static String baseUrl = 'https://widespheres.com/api';
+  static const baseUrl = 'https://widespheres.com/api';
 
   /// Auth
-  static String test_auth = '/test-auth-key';
-  
-  static String loginUrl = '/auth/login';
-  static String registerUrl = '/auth/register';
-  static String logoutUrl = '/auth/logout';
-  static String getProfile = '/user/profile';
-  static String updateProfileUrl = '/user/profile';
-  static String verifyOtpUrl = '';
+  static const testAuth = '/test-auth-key';
+  static const loginUrl = '/auth/login';
+  static const registerUrl = '/auth/register';
+  static const logoutUrl = '/auth/logout';
+  static const getProfile = '/user/profile';
+  static const updateProfileUrl = '/user/profile';
+  static const verifyOtpUrl = '';
 
   /// Home
-  static String homeUrl = '/home';
+  static const homeUrl = '/home';
 
   //static String get  => null;
 }
