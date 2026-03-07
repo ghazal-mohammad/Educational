@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lms/global/design/common_sizes.dart';
 import 'package:lms/global/utils/consts/assets.dart';
 
-const Color _bg = Color(0xFFFCF8FF);
 const Color _purple = Color(0xFF331E53);
 const Color _muted = Color(0xFF806D95);
 const Color _textColor = Color(0xFF574C69);
@@ -41,7 +40,7 @@ class HomeHeader extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 16.r,
-              backgroundColor: _purple.withOpacity(0.17),
+              backgroundColor: _purple.withValues(alpha: 0.17),
               child: SvgPicture.asset(AppAssets.notificationicon,
                   width: 15.w,
                   height: 16.h,
@@ -50,7 +49,7 @@ class HomeHeader extends StatelessWidget {
             const CommonSizes(width: 6),
             CircleAvatar(
               radius: 16.r,
-              backgroundColor: _purple.withOpacity(0.17),
+              backgroundColor: _purple.withValues(alpha: 0.17),
               child: SvgPicture.asset(AppAssets.carticon,
                   width: 16.w,
                   height: 16.h,

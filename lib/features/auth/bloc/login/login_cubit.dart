@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:lms/features/auth/data/repositories/request_otp_use_case.dart';
+
 import '../../data/models/login_request_model.dart';
-import '../../domain/usecases/request_otp_usecase.dart';
 import '../login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -35,8 +36,8 @@ class LoginCubit extends Cubit<LoginState> {
     result.when(
       success: (response) {
         // لما يصير في OTP حقيقي، بنقرأه من response.otp
-        final otpId =
-            response.otp?.otpId ?? 'fake_id_${phone}_${DateTime.now().millisecondsSinceEpoch}';
+        final otpId = response.otp?.otpId ??
+            'fake_id_${phone}_${DateTime.now().millisecondsSinceEpoch}';
 
         emit(LoginState.success(
           otpId: otpId,
@@ -62,4 +63,3 @@ class LoginCubit extends Cubit<LoginState> {
     return super.close();
   }
 }
-

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/global/design/color_app.dart';
 
+/// A spacing widget class for consistent spacing throughout the app.
+/// Use static properties for common spacing values or create instances.
 class CommonSizes extends SizedBox {
   const CommonSizes({
     super.key,
@@ -11,6 +13,12 @@ class CommonSizes extends SizedBox {
     super.height,
     super.child,
   });
+
+  /// Named constructor for vertical spacing
+  const CommonSizes.height(double height) : super(height: height);
+
+  /// Named constructor for horizontal spacing
+  const CommonSizes.width(double width) : super(width: width);
 
   static const TINY_LAYOUT_W_GAP = 10.0;
   static const SMALL_LAYOUT_W_GAP = 25.0;
@@ -53,9 +61,9 @@ class CommonSizes extends SizedBox {
   static final hHugeSpace = CommonSizes(width: 100.w);
 
   static divider(BuildContext context) => Divider(
-    height: 1.5.h,
-    color: ColorManager.grey.withValues(alpha: 0.2),
-    thickness: 1.5.h,
-  );
+        height: 1.5.h,
+        color: ColorManager.grey.withValues(alpha: 0.2),
+        thickness: 1.5.h,
+      );
   static const spacer = Spacer();
 }

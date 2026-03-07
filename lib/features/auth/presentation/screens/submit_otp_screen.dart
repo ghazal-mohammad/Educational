@@ -8,7 +8,10 @@ import 'package:lms/global/utils/router/router_path.dart';
 import 'package:lms/global/utils/reuses_widgets/messages/snack_bar.dart';
 import '../../bloc/otp/submit_otp_cubit.dart';
 import '../../bloc/submit_otp_state.dart';
-import '../widgets/otp_widgets.dart';
+import '../widgets/otp_header.dart';
+import '../widgets/otp_form.dart';
+import '../widgets/otp_timer_section.dart';
+import '../widgets/otp_button.dart';
 
 class SubmitOtpScreen extends StatefulWidget {
   final String otpId;

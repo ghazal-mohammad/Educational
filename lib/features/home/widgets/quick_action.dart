@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lms/global/components/qick_action_card.dart';
 import 'package:lms/global/design/common_sizes.dart';
 import 'package:lms/global/utils/consts/assets.dart';
 
 const Color _purple = Color(0xFF331E53);
-const Color _border = Color(0xFFB7A4C6);
-const Color _textColor = Color(0xFF574C69);
 
 class QuickAction extends StatelessWidget {
   const QuickAction({super.key});
@@ -39,12 +36,13 @@ class QuickAction extends StatelessWidget {
               value1: "12 ",
               value2: "Courses",
             ),
-             QuickActionCard(
+            QuickActionCard(
               icon: AppAssets.exerciseIcon,
               title: "Exercises",
               value1: "13 ",
               value2: "Exercises",
-            ), QuickActionCard(
+            ),
+            QuickActionCard(
               icon: AppAssets.newsIcon,
               title: "Last News",
               value1: "3 ",

@@ -9,7 +9,8 @@ class Urls {
   static const logoutUrl = '/auth/logout';
   static const getProfile = '/user/profile';
   static const updateProfileUrl = '/user/profile';
-  static const verifyOtpUrl = '';
+  static const requestOtp = '/auth/request-otp';
+  static const verifyOtp = '/auth/verify-otp';
 
   /// Home
   static const homeUrl = '/home';

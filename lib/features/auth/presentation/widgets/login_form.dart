@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/global/design/color_app.dart';
 import 'package:lms/global/design/common_sizes.dart';
 import '../../bloc/login/login_cubit.dart';
 import '../../bloc/login_state.dart';
@@ -14,9 +15,6 @@ class LoginForm extends StatelessWidget {
     required this.phoneController,
     required this.formKey,
   });
-
-  static const Color _purple = Color(0xFF331E53);
-  static const Color _border = Color(0xFFB7A4C6);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class LoginForm extends StatelessWidget {
               fontFamily: 'Ubuntu',
               fontWeight: FontWeight.w700,
               fontSize: 20.sp,
-              color: _purple,
+              color: ColorManager.primaryColor,
             ),
           ),
         ),
@@ -44,7 +42,7 @@ class LoginForm extends StatelessWidget {
             fontFamily: 'Inter',
             fontSize: 16.sp,
             fontWeight: FontWeight.w400,
-            color: _purple,
+            color: ColorManager.primaryColor,
           ),
         ),
         const CommonSizes(height: 8),
@@ -56,7 +54,7 @@ class LoginForm extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.86),
-              border: Border.all(color: _border, width: 2),
+              border: Border.all(color: ColorManager.secondaryColor, width: 2),
               borderRadius: BorderRadius.circular(8.r),
             ),
             child: Row(
@@ -68,15 +66,16 @@ class LoginForm extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
-                        color: _purple,
+                        color: ColorManager.primaryColor,
                       ),
                     ),
-                    Icon(Icons.arrow_drop_down, color: _purple, size: 20.sp),
+                    Icon(Icons.arrow_drop_down,
+                        color: ColorManager.primaryColor, size: 20.sp),
                     const CommonSizes(width: 8),
                     Container(
                       width: 1,
                       height: 22.h,
-                      color: _border.withValues(alpha: 0.5),
+                      color: ColorManager.secondaryColor.withValues(alpha: 0.5),
                     ),
                     const CommonSizes(width: 12),
                   ],
@@ -87,20 +86,21 @@ class LoginForm extends StatelessWidget {
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
                     onSubmitted: (_) {
-                      context.read<LoginCubit>().getOtp();
+                      // Trigger getOtp through the form if needed
                     },
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w400,
-                      color: _purple,
+                      color: ColorManager.primaryColor,
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'XXXXXXXX',
                       hintStyle: TextStyle(
-                        color: _purple.withValues(alpha: 0.70),
+                        color:
+                            ColorManager.primaryColor.withValues(alpha: 0.70),
                         fontFamily: 'Inter',
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w400,
@@ -129,7 +129,7 @@ class LoginForm extends StatelessWidget {
                     fontFamily: 'Ubuntu',
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFFB7A4C6),
+                    color: ColorManager.secondaryColor,
                     shadows: [
                       Shadow(
                         color: Colors.black.withValues(alpha: 0.05),
@@ -145,7 +145,7 @@ class LoginForm extends StatelessWidget {
             return const CommonSizes(height: 24);
           },
         ),
-      ]
+      ],
     );
   }
 }

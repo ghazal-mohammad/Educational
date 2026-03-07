@@ -1,16 +1,13 @@
 // lib/features/home/presentation/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lms/features/home/widgets/continue_learning.dart';
 import 'package:lms/features/home/widgets/home_header.dart';
 import 'package:lms/features/home/widgets/quick_action.dart';
 import 'package:lms/features/home/widgets/search_section.dart';
 import 'package:lms/features/home/widgets/top_courses.dart';
 import 'package:lms/features/home/widgets/your_progress.dart';
-import 'package:lms/global/components/course_card.dart';
 import 'package:lms/global/design/common_sizes.dart';
-import 'package:path/path.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 const Color _bg = Color(0xFFFCF8FF);
+
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
 
@@ -54,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const CommonSizes(
                   height: 15,
                 ),
-                YourProgress(),
+                const YourProgress(),
               ],
             ),
           ),

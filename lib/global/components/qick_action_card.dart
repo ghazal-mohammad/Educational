@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lms/global/components/course_card.dart';
 import 'package:lms/global/design/common_sizes.dart';
+
 const Color _purple = Color(0xFF331E53);
 const Color _border = Color(0xFFB7A4C6);
 const Color _textColor = Color(0xFF574C69);
@@ -20,8 +21,7 @@ class QuickActionCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.value1,
-  
-    this.onTap, 
+    this.onTap,
     required this.value2,
   });
 
@@ -30,9 +30,8 @@ class QuickActionCard extends StatelessWidget {
     return AppCard(
       height: 114.h,
       width: 114.w,
-      backgroundColor: _border.withOpacity(0.2),
+      backgroundColor: _border.withValues(alpha: 0.2),
       borderRadius: 18.r,
-      
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -62,21 +61,19 @@ class QuickActionCard extends StatelessWidget {
                 TextSpan(
                   text: value1,
                   style: TextStyle(
-                    color: Color(0xFF00C2AC),
+                    color: const Color(0xFF00C2AC),
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
                 TextSpan(
-                  text: value2,
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w400,
-                    color: _textColor,
-                 
-                  )
-                )
+                    text: value2,
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      color: _textColor,
+                    ))
               ],
             ),
           ),

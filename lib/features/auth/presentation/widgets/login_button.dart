@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lms/global/design/color_app.dart';
 import 'package:lms/global/design/common_sizes.dart';
 
 class LoginButton extends StatelessWidget {
@@ -12,9 +13,6 @@ class LoginButton extends StatelessWidget {
     this.isLoading = false,
   });
 
-  static const Color _purple = Color(0xFF331E53);
-  static const Color _buttonText = Color(0xFFFCF8FF);
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +23,7 @@ class LoginButton extends StatelessWidget {
           height: 46.h,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: _purple,
+              backgroundColor: ColorManager.primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(9.r),
               ),
@@ -37,7 +35,8 @@ class LoginButton extends StatelessWidget {
                     height: 24.h,
                     width: 24.w,
                     child: const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(_buttonText),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(ColorManager.pureWhite),
                     ),
                   )
                 : Text(
@@ -46,7 +45,7 @@ class LoginButton extends StatelessWidget {
                       fontFamily: 'Inter',
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
-                      color: _buttonText,
+                      color: ColorManager.pureWhite,
                     ),
                   ),
           ),

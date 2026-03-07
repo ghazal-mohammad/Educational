@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lms/global/design/common_sizes.dart';
+import 'package:lms/global/design/color_app.dart';
 
 class BottomGlassNav extends StatelessWidget {
   const BottomGlassNav({
@@ -21,25 +21,35 @@ class BottomGlassNav extends StatelessWidget {
       _NavItem('Exercises', 'assets/icons/exercise.svg'),
       _NavItem('News', 'assets/icons/news.svg'),
       _NavItem('Library', 'assets/icons/library.svg'),
-      _NavItem('Profile', 'assets/icons/profile.svg'),
+      _NavItem('Status', 'assets/icons/profile.svg'),
     ];
+
+    // Get bottom safe area padding
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return SafeArea(
       top: false,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+        padding: EdgeInsets.only(
+          left: 20.w,
+          right: 20.w,
+          bottom: bottomPadding > 0 ? 4.h : 8.h,
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(32.r),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
             child: Container(
+              // Figma: width: 351px, height: 64px
+              width: 351.w,
+              height: 64.h,
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.10), // glass
+                color: ColorManager.pureWhite.withValues(alpha: 0.6),
                 borderRadius: BorderRadius.circular(32.r),
               ),
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 4.h),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(items.length, (i) {
                   final selected = i == currentIndex;
                   return _NavButton(
@@ -68,8 +78,6 @@ class _NavButton extends StatelessWidget {
   final bool selected;
   final VoidCallback onTap;
 
-  static const Color _purple = Color(0xFF331E53);
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -78,9 +86,14 @@ class _NavButton extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOut,
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+        // Figma: Selected = 54x34px, Unselected = 52x32px, Padding 8px all sides
+        width: selected ? 54.w : 52.w,
+        height: selected ? 34.h : 32.h,
+        padding: EdgeInsets.all(8.r),
         decoration: BoxDecoration(
-          color: selected ? const Color(0x80B7A4C6) : Colors.transparent,
+          color: selected
+              ? ColorManager.secondaryColor.withValues(alpha: 0.5)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(23.r),
         ),
         child: Column(
@@ -89,31 +102,26 @@ class _NavButton extends StatelessWidget {
           children: [
             SvgPicture.asset(
               item.asset,
-              width: selected ? 14.w : 18.w,
-              height: selected ? 16.h : 18.h,
+              width: 14.w,
+              height: 16.h,
               colorFilter: ColorFilter.mode(
-                selected ? _purple : _purple.withValues(alpha: 0.5),
+                selected
+                    ? ColorManager.primaryColor
+                    : ColorManager.primaryColor.withValues(alpha: 0.5),
                 BlendMode.srcIn,
               ),
             ),
-            CommonSizes(height: selected ? 2.h : 0),
-
-            // ✅ النص يظهر فقط للعنصر المحدد مثل الصورة + بدون overflow
+            // Gap: 2px between icon and text
+            SizedBox(height: 2.h),
             if (selected)
-              CommonSizes(
-                height: 15.h,
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    item.label,
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      color: _purple,
-                      height: 1,
-                    ),
-                  ),
+              Text(
+                item.label,
+                style: TextStyle(
+                  fontFamily: 'Sora',
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w400,
+                  color: ColorManager.primaryColor,
+                  height: 1,
                 ),
               ),
           ],

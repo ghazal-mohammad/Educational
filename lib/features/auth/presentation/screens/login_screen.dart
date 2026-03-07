@@ -68,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           phoneController: _loginCubit.phoneController,
                           formKey: _loginCubit.loginFormKey,
                         ),
-
                         BlocBuilder<LoginCubit, LoginState>(
                           builder: (context, state) {
                             final isLoading = state.maybeWhen(
@@ -77,8 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                             return LoginButton(
                               isLoading: isLoading,
-                              onPressed: () =>
-                                  context.read<LoginCubit>().getOtp(),
+                              onPressed: () => _loginCubit.getOtp(),
                             );
                           },
                         ),

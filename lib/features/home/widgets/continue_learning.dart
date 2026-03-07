@@ -27,7 +27,7 @@ class ContinueLearningSection extends StatelessWidget {
           ),
         ),
         AppCard(
-          backgroundColor: _border.withOpacity(0.2),
+          backgroundColor: _border.withValues(alpha: 0.2),
           borderRadius: 18.r,
           height: 160.h,
           width: double.infinity,
@@ -122,7 +122,7 @@ class ContinueLearningSection extends StatelessWidget {
                 height: 30.h,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _border.withOpacity(0.6),
+                    backgroundColor: _border.withValues(alpha: 0.6),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.r),
                     ),

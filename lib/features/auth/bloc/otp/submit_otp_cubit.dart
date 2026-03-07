@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lms/features/auth/data/repositories/verify_otp_use_case.dart';
 
-import '../../domain/usecases/verify_otp_usecase.dart';
 import '../submit_otp_state.dart';
 
 class SubmitOtpCubit extends Cubit<SubmitOtpState> {
@@ -70,4 +70,3 @@ class SubmitOtpCubit extends Cubit<SubmitOtpState> {
     return super.close();
   }
 }
-

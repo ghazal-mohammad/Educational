@@ -27,7 +27,7 @@ class TopCoursesSection extends StatelessWidget {
                 color: _purple,
               ),
             ),
-            CommonSizes(
+            const CommonSizes(
               width: 129,
             ),
             Padding(
@@ -88,7 +88,7 @@ class TopCoursesSection extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4.r),
-                                color: _purple.withOpacity(0.2),
+                                color: _purple.withValues(alpha: 0.2),
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 4.w),
                               child: Text(
@@ -142,7 +142,7 @@ class TopCoursesSection extends StatelessWidget {
                                   color: _textColor,
                                 ),
                               ),
-                             const CommonSizes(width: 20),
+                              const CommonSizes(width: 20),
                               Icon(
                                 Icons.signal_cellular_alt,
                                 size: 10.w,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lms/features/home/presentation/screens/home_screen.dart';
 
 import '../widgets/bottom_glass_nav.dart';
@@ -14,17 +13,8 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int _selectedIndex = 0;
 
-  // final List<String> _routes = [
-  //   RouterPath.home,
-  //   RouterPath.exercises,
-  //   RouterPath.news,
-  //   RouterPath.library,
-  //   RouterPath.profile,
-  // ];
-
-
   final List<Widget> _screens = const [
-     HomeScreen(),
+    HomeScreen(),
     _DummyScreen(title: 'Exercises'),
     _DummyScreen(title: 'News'),
     _DummyScreen(title: 'Library'),
@@ -35,15 +25,9 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 8.h),
-          child: BottomGlassNav(
-            currentIndex: _selectedIndex,
-            onTap: (i) => setState(() => _selectedIndex = i),
-          ),
-        ),
+      bottomNavigationBar: BottomGlassNav(
+        currentIndex: _selectedIndex,
+        onTap: (i) => setState(() => _selectedIndex = i),
       ),
     );
   }
