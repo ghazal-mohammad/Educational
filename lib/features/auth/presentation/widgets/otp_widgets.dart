@@ -114,7 +114,6 @@ class OtpTimerSection extends StatelessWidget {
 
         const CommonSizes(height: 10),
 
-        // ✅ السطر الثاني: الأيقونة + Resend + الوقت
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

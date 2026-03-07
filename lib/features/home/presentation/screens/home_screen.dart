@@ -30,32 +30,40 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: _bg,
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-            child: Column(
-              children: [
-                const HomeHeader(),
-                SearchSection(controller: _searchController),
-                const CommonSizes(height: 18),
-                const ContinueLearningSection(),
-                const CommonSizes(
-                  height: 22,
+      backgroundColor: _bg,
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              clipBehavior: Clip.hardEdge,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
                 ),
-                const TopCoursesSection(),
-                const CommonSizes(
-                  height: 17,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+                  child: Column(
+                    children: [
+                      const HomeHeader(),
+                      SearchSection(controller: _searchController),
+                      const CommonSizes(height: 18),
+                      const ContinueLearningSection(),
+                      const CommonSizes(height: 22),
+                      const TopCoursesSection(),
+                      const CommonSizes(height: 17),
+                      const QuickAction(),
+                      const CommonSizes(height: 15),
+                      const YourProgress(),
+                      // Extra space at bottom for navigation bar
+                      SizedBox(height: 100.h),
+                    ],
+                  ),
                 ),
-                const QuickAction(),
-                const CommonSizes(
-                  height: 15,
-                ),
-                const YourProgress(),
-              ],
-            ),
-          ),
-        )));
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

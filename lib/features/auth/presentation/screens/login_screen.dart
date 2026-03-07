@@ -8,7 +8,9 @@ import 'package:lms/global/utils/di/dependency_injection.dart';
 import '../../../../global/utils/router/router_path.dart';
 import '../../bloc/login/login_cubit.dart';
 import '../../bloc/login_state.dart';
-import '../widgets/index.dart';
+import '../widgets/login_image.dart';
+import '../widgets/login_form.dart';
+import '../widgets/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

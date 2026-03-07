@@ -5,14 +5,12 @@
 - [x] 2. CommonSizes - Fixed with named constructors
 - [x] 3. Replace context.read with getIt
 - [x] 6. Split OTP widgets to separate files
-- [x] 4. Clean up index.dart exports
+- [x] 4. Clean up index.dart exports (deleted file)
+- [x] 1. Theme file - Already exists in main.dart ✅
 
-## Pending:
-- [ ] 1. Theme file improvements
-- [ ] 5. Widget structure improvements
+## In Progress:
+- [ ] 8. Organize Repo/UserCase
 
 ## Notes:
 - assets.dart already exists ✅
-- Created 4 new OTP widget files: otp_header.dart, otp_form.dart, otp_timer_section.dart, otp_button.dart
-- Removed context.read usage in login_screen.dart and login_form.dart
 

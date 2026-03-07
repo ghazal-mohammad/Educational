@@ -15,10 +15,12 @@ class CommonSizes extends SizedBox {
   });
 
   /// Named constructor for vertical spacing
-  const CommonSizes.height(double height) : super(height: height);
+  const CommonSizes.height({super.key, required double height})
+      : super(height: height);
 
   /// Named constructor for horizontal spacing
-  const CommonSizes.width(double width) : super(width: width);
+  const CommonSizes.width({super.key, required double width})
+      : super(width: width);
 
   static const TINY_LAYOUT_W_GAP = 10.0;
   static const SMALL_LAYOUT_W_GAP = 25.0;

@@ -24,7 +24,9 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: _screens[_selectedIndex],
+      extendBody: true,
       bottomNavigationBar: BottomGlassNav(
         currentIndex: _selectedIndex,
         onTap: (i) => setState(() => _selectedIndex = i),

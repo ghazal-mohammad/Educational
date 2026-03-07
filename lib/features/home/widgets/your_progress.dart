@@ -29,7 +29,7 @@ class YourProgress extends StatelessWidget {
           height: 6.h,
         ),
         CommonSizes(
-          height: 115.h,
+          height: 120.h,
           child: ListView.separated(
             separatorBuilder: (context, index) {
               return SizedBox(
